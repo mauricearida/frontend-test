@@ -7,6 +7,7 @@ const Layout = (props) => {
   const router = useRouter();
 
   const logout = async () => {
+    //on logout reset everything
     deleteLocalStorage("username");
     deleteLocalStorage("token");
     await router.push("/login");
@@ -19,6 +20,7 @@ const Layout = (props) => {
   let menu;
 
   if (!props.auth) {
+    //if we are not authenticated, use this part
     menu = (
       <ul className="navbar-nav me-auto mb-2 mb-md-0">
         <li className="nav-item">
@@ -34,6 +36,7 @@ const Layout = (props) => {
       </ul>
     );
   } else {
+    //if we are authenticated, use this part
     menu = (
       <ul className="navbar-nav me-auto mb-2 mb-md-0">
         <li className="nav-item">

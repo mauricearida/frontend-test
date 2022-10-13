@@ -4,11 +4,13 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 const Register = () => {
+  //setting the variables states
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
   const signup = async (data: any) => {
+    //setting the header for the API request
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -26,20 +28,11 @@ const Register = () => {
 
   const submit = async (e: SyntheticEvent) => {
     e.preventDefault();
-
-    // await fetch('http://localhost:8000/api/register', {
-    //     method: "POST",
-    //     headers: {'Content-Type': 'application/json'},
-    //     body: JSON.stringify({
-    //         username,
-
-    //         password
-    //     })
-    // });
-
+    // building the data object
     const data = { username, password };
     console.log("data", data);
 
+    //making the api request
     signup(data)
       .then((response) => {
         console.log("response", response);
@@ -47,7 +40,7 @@ const Register = () => {
       .catch((err) => {
         console.log("signn api function error: ", err);
       });
-
+    //then pushing to the login page
     await router.push("/login");
   };
 

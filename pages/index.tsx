@@ -5,10 +5,12 @@ export default function Home() {
   const [message, setMessage] = useState("");
   const [auth, setAuth] = useState(false);
 
+  //getting an already set local storage item
   const getLocalStorage = (key: any) => {
     return JSON.parse(localStorage.getItem(key));
   };
 
+  //setting the variables states
   useEffect(() => {
     if (getLocalStorage("token")) {
       setAuth(true);
@@ -18,15 +20,13 @@ export default function Home() {
   });
 
   const getdDisplay = () => {
+    //timeout set since useeffect is faster than getLocalStorage
+    //(should have been done using passing states when pushing to next page)
     setTimeout(() => {
       if (getLocalStorage("username")) {
-        console.log("1111");
         setMessage(`Hi ${getLocalStorage("username")}`);
-        console.log('getLocalStorage("username")', getLocalStorage("username"));
       } else {
-        console.log("22222");
         setMessage("no one is logged in");
-        console.log('getLocalStorage("username")', getLocalStorage("username"));
       }
     }, 650);
   };

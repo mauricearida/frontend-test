@@ -5,11 +5,13 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 const Login = () => {
+  //setting the variables states
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
   const signin = async (data: any) => {
+    //setting the header for the API request
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -25,27 +27,28 @@ const Login = () => {
     return response;
   };
 
+  //setting a localstorage item
   const setLocalStorage = (key: any, value: any) => {
     localStorage.setItem(key, JSON.stringify(value));
   };
 
   const submit = async (e: SyntheticEvent) => {
     e.preventDefault();
-
+    // building the data object
     const data = { username, password };
-    console.log("data login", data);
+
     signin(data)
       .then((response) => {
         setLocalStorage("token", response.data.accessToken);
-        console.log("1212121");
+
         setLocalStorage("username", response.data.username);
-        console.log("23232323");
+
         console.log("response login", response);
       })
       .catch((err) => {
         console.log("signn api function error: ", err);
       });
-
+    //pushing to main page
     await router.push("/");
   };
 
